@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "optics_core"
+version = "0.1.0"
+description = "GPU-accelerated optical ray tracing and design library"
+requires-python = ">=3.9"
+dependencies = [
+    "torch>=2.0",
+    "torchvision",
+    "pytest",
+    "pandas",
+    "openpyxl",
+    "opencv-python",
+]
+
+[tool.setuptools.packages.find]
+include = ["optics_core*", "zemax_utils*"]
+
+[tool.black]
+line-length = 120  # 将限制扩大到 120 或 150 字符
+
+[tool.ruff]
+line-length = 120
