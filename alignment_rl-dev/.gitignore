@@ -1,0 +1,11 @@
+*.pyc
+figures/
+logs
+models
+results
+*.zip
+*.png
+*.pkl
+*.gif
+*.mpz
+example
