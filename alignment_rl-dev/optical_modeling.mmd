@@ -1,0 +1,32 @@
+flowchart TB
+    subgraph INPUT["输入"]
+        ZMX["光学处方\n(ZMX)"]
+        ALIGN["对准参数\n(dx, dy)"]
+        TOL["制造公差"]
+    end
+
+    subgraph OPTICAL["光学计算引擎"]
+        direction LR
+        SYS["光学系统\n构建"]
+        TRACE["光线追迹"]
+        PSF["PSF计算"]
+        MTF["MTF提取"]
+    end
+
+    subgraph OUTPUT["输出"]
+        RAW["原始MTF\n多视场×多频点"]
+        REL["相对质量\nq=log(MTF/MTF_ref)"]
+    end
+
+    ZMX --> SYS
+    ALIGN --> SYS
+    TOL --> SYS
+    SYS --> TRACE
+    TRACE --> PSF
+    PSF --> MTF
+    MTF --> RAW
+    RAW --> REL
+
+    style INPUT fill:#e1f5ff,stroke:#0288d1,stroke-width:3px
+    style OPTICAL fill:#fff9e1,stroke:#f57c00,stroke-width:3px
+    style OUTPUT fill:#e8f5e9,stroke:#388e3c,stroke-width:3px

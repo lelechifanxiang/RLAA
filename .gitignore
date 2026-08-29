@@ -1,0 +1,31 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env_venv/
+
+# --- Training artifacts (large) ---
+models/
+logs/
+*.zip
+*.pkl
+*.pt
+*.pth
+*.npz
+
+# --- Only ship the active dev tree + optics kernel ---
+alignment_rl-dev00/
+alignment_rl-linux/
+alignment_rl-linux-package/
+alignment_rl-dev/alignment_rl-dev/
+optics_core-dev00/
+optics_core-dev/optics_core-dev/
+demo_optics_core/
+rlaa/
+
+# --- Scratch ---
+ole.json
+*.STOP
+.ipynb_checkpoints/

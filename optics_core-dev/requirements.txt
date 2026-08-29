@@ -1,0 +1,5 @@
+pytest>=8.3,<9.0
+pandas>=2.0,<3.0
+openpyxl>=3.1,<4.0
+zospy==2.1.5
+opencv-python

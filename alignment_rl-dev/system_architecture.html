@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RLAA系统架构图</title>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'neutral',
+            themeVariables: {
+                fontSize: '16px'
+            }
+        });
+    </script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background: #f8fafc;
+        }
+        h1 {
+            color: #0f172a;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #64748b;
+            margin-bottom: 40px;
+            font-size: 14px;
+        }
+        .diagram-container {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .diagram-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .diagram-title::before {
+            content: '';
+            width: 4px;
+            height: 24px;
+            background: linear-gradient(to bottom, #3b82f6, #8b5cf6);
+            border-radius: 2px;
+        }
+        .mermaid {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .description {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f1f5f9;
+            border-radius: 8px;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #475569;
+        }
+        .description h3 {
+            margin-top: 0;
+            color: #334155;
+            font-size: 16px;
+        }
+        .description ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔬 RLAA系统架构</h1>
+    <div class="subtitle">强化学习主动对准 (Reinforcement Learning for Active Alignment)</div>
+
+    <div class="diagram-container">
+        <div class="diagram-title">图1：光学建模体系</div>
+        <div class="mermaid">
+flowchart LR
+    INPUT["📥 输入<br/>────<br/>光学处方(ZMX)<br/>对准参数(dx,dy)<br/>制造公差"]
+
+    OPTICAL["⚙️ 光学引擎<br/>────────<br/>光学系统构建<br/>光线追迹<br/>PSF计算<br/>MTF提取"]
+
+    OUTPUT["📤 输出<br/>────<br/>原始MTF<br/>(多视场×多频点)<br/>↓<br/>相对质量指标<br/>q=log(MTF/MTF_ref)"]
+
+    INPUT ==> OPTICAL ==> OUTPUT
+
+    style INPUT fill:#e1f5ff,stroke:#0288d1,stroke-width:3px
+    style OPTICAL fill:#fff9e1,stroke:#f57c00,stroke-width:3px
+    style OUTPUT fill:#e8f5e9,stroke:#388e3c,stroke-width:3px
+        </div>
+        <div class="description">
+            <h3>核心流程</h3>
+            <ul>
+                <li><strong>输入层</strong>：光学处方 + 对准参数 + 制造公差</li>
+                <li><strong>计算引擎</strong>：光学系统构建 → 光线追迹 → PSF → MTF</li>
+                <li><strong>输出层</strong>：原始MTF → 归一化质量指标</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="diagram-container">
+        <div class="diagram-title">图2：RL训练体系</div>
+        <div class="mermaid">
+flowchart LR
+    PHYSICS["🔬 物理层<br/>────<br/>光学建模<br/>MTF计算"]
+
+    ENV["🎮 环境层<br/>─────────<br/>Episode初始化<br/>状态管理<br/>观测生成<br/>奖励计算"]
+
+    ALGO["🧠 算法层<br/>─────────<br/>策略网络<br/>价值网络<br/>经验回放<br/>梯度更新"]
+
+    EVAL["📊 评估层<br/>────<br/>训练指标<br/>Baseline对比"]
+
+    PHYSICS <==> ENV <==> ALGO ==> EVAL
+
+    PARALLEL["⚡ 12个并行环境<br/>共享物理引擎"]
+    ENV -.-> PARALLEL
+
+    style PHYSICS fill:#e1f5ff,stroke:#0288d1,stroke-width:3px
+    style ENV fill:#fff9e1,stroke:#f57c00,stroke-width:3px
+    style ALGO fill:#f3e5f5,stroke:#7b1fa2,stroke-width:3px
+    style EVAL fill:#e8f5e9,stroke:#388e3c,stroke-width:3px
+    style PARALLEL fill:#ffe1e1,stroke:#d32f2f,stroke-width:2px,stroke-dasharray: 5 5
+        </div>
+        <div class="description">
+            <h3>训练流程</h3>
+            <ul>
+                <li><strong>物理层 ↔ 环境层</strong>：光学计算提供MTF反馈，环境管理对准状态</li>
+                <li><strong>环境层 ↔ 算法层</strong>：环境提供观测和奖励，算法输出动作</li>
+                <li><strong>算法层 → 评估层</strong>：训练过程监控与性能对比</li>
+                <li><strong>并行加速</strong>：12个环境实例共享1个物理引擎</li>
+            </ul>
+        </div>
+    </div>
+
+</body>
+</html>

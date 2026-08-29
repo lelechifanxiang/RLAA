@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "source": "Zemax MFE + System Data",
+  "systems": [
+    {
+      "zmx_file": "sg6_material_a.zmx",
+      "sha256": "b459ca83f9cd81a2f58c6a26a1ca1f82c0047abd26224ea71c68f4beeb18126b",
+      "effl_mm": 248.00023449892714,
+      "working_f_number": 5.995049831073798,
+      "ttl_mm": 307.962,
+      "image_plane_distance_mm": 202.073892046014,
+      "bfl_mm": 203.0368
+    },
+    {
+      "zmx_file": "sg6_material_b.zmx",
+      "sha256": "77b7fc630a8f59d19f5c38faddf9307a2f2ee9829b56d1d465eb5c6f53a0a032",
+      "effl_mm": 247.99894416137317,
+      "working_f_number": 6.001431537783394,
+      "ttl_mm": 307.987,
+      "image_plane_distance_mm": 188.001883933051,
+      "bfl_mm": 188.7974
+    },
+    {
+      "zmx_file": "sg6_material_c.zmx",
+      "sha256": "88175743a9bc35ddd5b96e0f6fd29dbadbf6115617fe87321c73a44ff05f1fce",
+      "effl_mm": 247.99941338416502,
+      "working_f_number": 5.9987824948173065,
+      "ttl_mm": 308.0004,
+      "image_plane_distance_mm": 187.999366942098,
+      "bfl_mm": 188.9757
+    },
+    {
+      "zmx_file": "sg6_hfov25_f3p0.zmx",
+      "sha256": "e4f12b50f43035718e7c46e3d385ef504ce1ed6ecf2afbcacf908162eb678fcf",
+      "effl_mm": 47.001679468418935,
+      "working_f_number": 2.9919206530104296,
+      "ttl_mm": 81.2138,
+      "image_plane_distance_mm": 23.1732219450314,
+      "bfl_mm": 23.30369
+    },
+    {
+      "zmx_file": "sg6_hfov34_f4p8.zmx",
+      "sha256": "7a7d37e45c98260a535525d48d012cc986c5cebe5412170c39f7ea03b60243d4",
+      "effl_mm": 31.605344463702327,
+      "working_f_number": 4.752394231289282,
+      "ttl_mm": 56.49967,
+      "image_plane_distance_mm": 22.8112370204951,
+      "bfl_mm": 23.11608
+    }
+  ]
+}
